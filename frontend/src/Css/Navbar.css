@@ -1,0 +1,243 @@
+/* Navbar */
+
+.Navbar .Navbar_child span .navlink{
+  text-decoration: none;
+  list-style: none;
+}
+.Navbar .Navbar_child span a.link,
+.Navbar .Navbar_child span a.navlink {
+  text-decoration: none;
+  color: inherit; /* Optionally, to inherit the color */
+}
+
+.Navbar{
+  background-color: #00bbf0;
+  /* color: white; */
+  /* background: rgba(33, 34, 51, 0.9); */
+  padding: 10px;
+  font-weight: 600;
+
+  font-family: sans-serif;
+}
+.Navbarinner_flex {
+  width: fit-content;
+  display:flex;
+  align-items: center;
+  width: 20%;
+  justify-content: space-evenly;
+  /* color: white; */
+}
+.nav1{
+  display: none;
+}
+.Navbar_child{
+  width: 100%;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  
+}
+.serach-input{
+  width: 450px;
+  border-radius: 10px;
+  padding: 12px;
+  border: none;
+  /* background-color: #373952; */
+
+
+}
+
+
+
+.iconFlex{
+    display: flex;
+    align-items: center;
+}
+.menuicon{
+    font-size: 25px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.profile-icon{
+    font-size: 20px;
+    border: black 1px solid;
+    padding: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.heart-icon{
+    margin-right: 3px;
+}
+.myquiz-span{
+    display: flex;
+    align-items: center;
+}
+
+
+
+  
+  .black_bg{
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    overflow: hidden;
+    top: 10;
+    left: 0;
+    background-color: black;
+    opacity: 0.8;
+  }
+  .login.open {
+    right: 0; 
+  }
+
+  .Login_title{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    margin: 10px;
+    font-weight: 500;
+  }
+ .centered-form{
+  width: 90%;
+  margin-top: 120px;
+  margin-left: 20px;
+  position: relative;
+  border: 1px solid  grey;
+  /* margin: auto; */
+
+}
+
+/* Login Form csss */
+  .login {
+    width: 380px;
+    height: 90%;
+    position: fixed;
+    top: 10%; /* Added 'px' to specify the top position */
+    z-index: 2;
+    right: -450px;
+    background-color: #f7f7fa;
+    transition: right 0.5s ease;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  }
+  
+  .login input[type="email"],
+  .login input[type="password"] {
+    padding: 12px 14px;
+    border: 2px solid transparent;
+    background-color: #f7f7fa;
+    color: rgb(49, 50, 55); /* Change input text color to a darker shade */
+    border-radius: 8px;
+    width: calc(90% - 28px); /* Adjust width with padding */
+    margin: 15px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    resize: none;
+    outline: 0;
+    border:1px solid black;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .login input[type="email"]:focus,
+  .login input[type="password"]:focus {
+    border-color: transparent; /* Remove border highlighting on focus */
+  }
+  
+  .login input[type="email"]::placeholder,
+  .login input[type="password"]::placeholder {
+    font-family: 'Nunito', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: rgb(49, 50, 55); /* Change placeholder color back to normal */
+  }
+  
+
+  .Login-btn{
+    padding: 12px 14px;
+    border: 2px solid transparent;
+    background-color: #28293d;
+    color: rgb(249, 250, 255);
+    border-radius: 8px;
+    width:91%;
+    margin-left: 15px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    resize: none;
+    outline: 0px;
+    transition: border-color 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+  .error {
+    color: red;
+    font-size: 0.8em;
+    margin: 0px;
+    margin-left: 20px;
+  }
+  
+  .login_ptag{
+    font-size: medium;
+    margin-left: 38px;
+  }
+
+
+
+
+
+  /* hamburger sidebar  */
+
+  .Divider_Sidebar{
+    width: 100%;
+    /* width: 2px; */
+    height: 1px;
+    background-color: #28293d;
+    margin: 10px 0px 10px 0px;
+
+  }
+
+  .menu{
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 10;
+    left: -250px; /* Initially hide the menu by positioning it off-screen */
+    background-color: #fff;
+    transition: left 0.3s ease; /* Apply a transition effect */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 101;
+    overflow: scroll;
+  }
+  
+  .menu.open {
+    left: 0; /* Slide the menu in from the left when 'open' class is applied */
+  }
+  .quiz-categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .quiz-categories li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .quiz-categories li span {
+    margin-right: 10px;
+  }
+  
+  /* Highlighted icon on hover */
+  .quiz-categories li:hover span i {
+    color: #626161; /* Change color as desired */
+  }
+  
+  /* Move text to the right on hover */
+  .quiz-categories li:hover {
+    padding-left: 30px; /* Adjust as needed */
+  }
+  
