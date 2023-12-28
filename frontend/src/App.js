@@ -12,6 +12,7 @@ import QuizApp from'./Components/Quizquestion';
 import PrivateRoute from "./Routes/PrivateRoute";
 import adminpagecomponent from "./Admin/Adminpage";
 import History_Quizqestion from "./Quizqestion/History";
+import TakeQuiz from "./Quizqestion/Take-Quiz";
 function App() {
   return (
     <div className="App">
@@ -25,8 +26,9 @@ function App() {
             <Route path='Home' element={<HomeComponent />}/>
             {/* <Route path='Profile' element={<Profile />}/> */}
             <Route path="/quizQuestion" element={<QuizApp />}/>
-            <Route path="/history_quizes" element={<History_Quizqestion />}/>
+            <Route path="history_quizes" element={<History_Quizqestion />}/>
             <Route path="/Adminhome" element={<adminpagecomponent />}/>
+            <Route path="/Quizpage" element={<TakeQuiz />}/>
             <Route 
             path="/Profile"
             element={ <PrivateRoute Component={Profile}  /> }   />

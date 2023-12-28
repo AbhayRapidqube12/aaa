@@ -19,12 +19,13 @@ export const LoginSuccess = () => {
     };
 
 
-    export const setCategory = (category) => {
-        return {
-          type: 'SET_CATEGORY',
-          payload: category,
-        };
-      };
+    // export const setCategory = (category) => {
+    //     return {
+    //       type: 'SET_CATEGORY',
+    //       payload: category,
+    //     };
+    //   };
+
 
       export const setUser = (user) => {
         return {
@@ -33,3 +34,11 @@ export const LoginSuccess = () => {
         };
       };
 
+
+
+      export const setCategory = (category, subcategory) => {
+        return {
+          type: 'SET_CATEGORY',
+          payload: { category, subcategory },
+        };
+      };

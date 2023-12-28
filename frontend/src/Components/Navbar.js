@@ -9,6 +9,8 @@ import "../Css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 const NavlinkPage = () => {
 
+  // looged user data
+  const [Loggeduserinfo,setLoggeduserinfo]= useState({})
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -61,45 +63,50 @@ const NavlinkPage = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      
       axios
-        .get("http://localhost:3000/users")
+        .post("http://localhost:3001/Check_user",formData)
         .then((response) => {
-          const user = response.data.find(
-            (user) => user.email === formData.email
-          );
-
-          if (user) {
-            if (user.password === formData.password) {
-              // alert("Login successful");
-              toast.success("Login Successfully!")
-              dispatch(LoginSuccess());
-              navigate("/Home");
-              axios
-                .post("http://localhost:3000/Loggedusers", formData)
-                .then((result) => {
-                  console.log(result, "result of logged user is ");
-                  dispatch(setUser(user.firstName))
-                })
-                
-                .catch((err) =>
-                  console.log(err, "error while posting logged user")
-                );
-            } else {
-              toast.error("Wrong password");
-              
-            }
-          } else {
-            toast.error("user not foud") 
-            
+          if(response.status === 200){
+            toast.success(response.message)
+            console.log(response.data,"response of login ")
+            dispatch(LoginSuccess());
+            setLoggeduserinfo(response.data)
           }
+          else{
+            toast.alert(response.message)
+          }
+       
+        
         })
         .catch((err) => console.log(err, "error while fetching users"));
     }
 
   }
 
-
+  // if (user) {
+  //   if (user.password === formData.password) {
+  //     // alert("Login successful");
+  //     toast.success("Login Successfully!")
+  //     dispatch(LoginSuccess());
+  //     navigate("/Home");
+  //     axios
+  //       .post("http://localhost:3000/Loggedusers", formData)
+  //       .then((result) => {
+  //         console.log(result, "result of logged user is ");
+  //         dispatch(setUser(user.firstName))
+  //       })
+        
+  //       .catch((err) =>
+  //         console.log(err, "error while posting logged user")
+  //       );
+  //   } else {
+  //     toast.error("Wrong password");
+      
+  //   }
+  // } else {
+  //   toast.error("user not foud") 
+    
+  // }
 
 
   return (
@@ -135,7 +142,7 @@ const NavlinkPage = () => {
              <a style={{ textDecoration: "none", color: "white" , }}>My Qyiz</a>
             </span>
 
-            {!isLoggedIn && (
+            {/* {isLoggedIn && ( */}
               <>
               {/* <span className="navlink">
                 <NavLink to="/Login"  style={{ textDecoration: "none", color: "white" , }}>Login</NavLink>
@@ -145,7 +152,7 @@ const NavlinkPage = () => {
                 <i onClick={toggleLogin} className="fa fa-user profile-icon" aria-hidden="true"></i>
                 </span>
               </>
-            )}
+            {/* )} */}
             
             {isLoggedIn && (
               <>
@@ -154,13 +161,13 @@ const NavlinkPage = () => {
                 </NavLink>
               </>
             )}
-             {isLoggedIn && (
+             {/* {isLoggedIn && (
               <>
                 <NavLink to="/Profile"   style={{ textDecoration: "none", color: "black" }}>
                  Profile
                 </NavLink>
               </>
-            )}
+            )} */}
             
           </div>
         </div>
@@ -169,12 +176,12 @@ const NavlinkPage = () => {
 
       <div  className={`menu ${isOpen ? 'open' : ''}`}>
       <ul className="quiz-categories">
-        <li onClick={()=>{navigate('home')}} > <span><i className="fa fa-home" aria-hidden="true"></i></span> Home</li>
+      <NavLink to='/Home'> <li> <span><i className="fa fa-home" aria-hidden="true"></i></span> Home</li></NavLink>
         <li> <span><i className="fa fa-history" aria-hidden="true"></i></span> Recently Played</li>
         <li> <span><i className="fa fa-fire" aria-hidden="true"></i></span> Trending</li>
         <li> <span><i className="fa fa-random" aria-hidden="true"></i></span> Random</li>
         <div className="Divider_Sidebar"></div>
-        <li onClick={()=>{navigate('history_quizes')}}> <span><i className="fa fa-hourglass-start" aria-hidden="true"></i></span> History</li>
+        <NavLink to='/history_quizes'> <li onClick={()=>{navigate('history_quizes')}}> <span><i className="fa fa-hourglass-start" aria-hidden="true"></i></span> History</li></NavLink>
         <li> <span><i className="fa fa-calculator" aria-hidden="true"></i></span> Maths</li>
         <li><span><i className="fa-solid fa-brain"></i></span> GK</li>
         <li> <span><i className="fa-solid fa-ticket"></i></span> Movies</li>
@@ -183,9 +190,9 @@ const NavlinkPage = () => {
         <li> <span><i className="fa fa-mobile" aria-hidden="true"></i></span> Technology</li>
     </ul>
       </div>
-
+      
       <div  className={`login ${isLogin ? 'open' : ''}`}>
-       
+      {!isLoggedIn &&
       <form className="form-container centered-form" onSubmit={handleSubmit}>
       <div className="Login_title"> Log In</div>
         <div className="input-group">
@@ -231,6 +238,26 @@ const NavlinkPage = () => {
           </span>
         </p>
       </form>
+}
+
+      {isLoggedIn &&  Loggeduserinfo &&
+      <div className="Profile_div">
+        <p className="Profile_tag">Profile</p>
+
+        <div className="userpic">
+         <img className="dummyuser_pic" src="https://th.bing.com/th/id/OIP.KopsrvStiUZsJd84_gQgTAHaHa?pid=ImgDet&w=208&h=208&c=7&dpr=1.5"></img> 
+         <p className="Name_tag"> <span>{Loggeduserinfo.data.firstname}   {Loggeduserinfo.data.lastname}</span></p>
+         <p className="Email_tag"><span>{Loggeduserinfo.data.email}</span></p>
+        </div>
+
+        <div>
+          <div></div>
+        </div>
+
+
+
+      </div>
+      }
 
               
       </div>

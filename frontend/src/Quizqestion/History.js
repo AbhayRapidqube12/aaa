@@ -15,55 +15,52 @@ const History_Quizqestion = ()=>{
 
     },[])
 
-    const handleCategory = (category) => {
+    const handleCategory = (category,subcategory) => {
+         dispatch(setCategory({category,subcategory}));
+          // navigate('/Quizpage')
           navigate('/quizQuestion')
-          dispatch(setCategory(category));
+        
         }
       
-
-
-
-
-
-
     return(
 <>
      <NavlinkPage />
      <div className="Quiz_Heding">
-        <h2 className="Quiz_h2"> Select A Quiz category</h2>
+        <h2 className="Quiz_h2">Play Quiz on History</h2>
       </div>
 
     
       <div className="Quiz_cards_flex">
         <div className="QuizCatgory_1 Quizcard">
-        <img src="https://wallpaperaccess.com/full/3570860.jpg" alt=""/>
+        <img src="https://th.bing.com/th/id/OIP.WKmy_vm1n3tHlOsGnpjk3AAAAA?rs=1&pid=ImgDetMain" alt=""/>
         <div>
-        <p>Category:<span >History</span></p>
+        <p>Topic:<span >Modern Era</span></p>
         <p>Question:<span>10</span></p>
-         <button className="Takequiz" onClick={()=>handleCategory('Modern Era')}>Take Quiz</button>
+         <button className="Takequiz"  onClick={() => handleCategory('History', 'Modern Era')}>Take Quiz</button>
         </div> 
         </div>
         
-
+        
+        
         <div className="QuizCatgory_2 Quizcard">
-        <img src="https://static.vecteezy.com/system/resources/previews/001/249/465/original/cute-science-lettering-and-laboratory-icons-banner-template-vector.jpg" alt=""/>
-        <p>Category:<span>Science</span></p>
+        <img src="https://th.bing.com/th/id/OIP.tvE344GM8uF9H0zyWVzpnQHaHa?w=170&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt=""/>
+        <p>Topic:<span >Medieval History</span></p>
         <p>Question:<span>10</span></p>
-        <button className="Takequiz" onClick={()=>handleCategory('Medieval History')}>Take Quiz</button>
+        <button className="Takequiz" onClick={() => handleCategory('History', 'Medieval History')}>Take Quiz</button>
         </div>
 
         <div className="QuizCatgory_3 Quizcard">
-        <img src="https://images6.alphacoders.com/455/thumb-1920-455565.png" alt=""/>
-        <p>Category:<span>Maths</span></p>
-        <p>Question:<span>10</span></p>
-        <button className="Takequiz" onClick={()=>handleCategory('World Wars')}>Take Quiz</button>
+        <img src="https://th.bing.com/th/id/OIP.bvSsWLCyCRmRn7cjx8Hg1AHaDH?w=319&h=147&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt=""/>
+        <p>Topic:<span >World War</span></p>
+        <p>Question: 10</p>
+        <button className="Takequiz" onClick={() => handleCategory('History', 'World Wars')}>Take Quiz</button>
         </div>
-
+        
         <div className="QuizCatgory_3 Quizcard">
-        <img src="https://th.bing.com/th/id/OIP.bjjP2ttvXSi6vCpTugRXnwHaLH?pid=ImgDet&w=474&h=711&rs=1" alt=""/>
-        <p>Category:<span>Ggeneral knowledge</span></p>
+        <img src="https://th.bing.com/th/id/OIP.LhpxGNUlbRSw1BncRnyK8QHaE0?w=204&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt=""/>
+        <p>Topic:<span >Ancient Civilizations</span></p>
         <p>Question:<span>10</span></p>
-        <button className="Takequiz" onClick={()=>handleCategory('Ancient Civilizations')}>Take Quiz</button>
+        <button className="Takequiz" onClick={() => handleCategory('History', 'Ancient Civilizations')}>Take Quiz</button>
         </div>
       </div>
 

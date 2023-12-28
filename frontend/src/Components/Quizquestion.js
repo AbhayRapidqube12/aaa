@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const QuizApp = () => {
-  const category = useSelector((state) => state.Cat.category);
+  // const category = useSelector((state) => state.Cat.category);
   const Username = useSelector((state) => state.User.username);
   const [quizData, setQuizData] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -14,12 +14,25 @@ const QuizApp = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const navigate = useNavigate();
   const [isScoreSet, setIsScoreSet] = useState(false); 
+
+
+  const category = useSelector((state) => state.Cat.category.category);
+  const subcategory = useSelector((state) => state.Cat.category.subcategory);
+// const [Quizquestion,setQuizquestion] = useState([])
+  const cat = {
+    category,
+    subcategory
+  }
+
+ 
+
   useEffect(() => {
     if (category) {
       fetchQuizData();
+      console.log(cat)
     }
-
   }, [category]);
+
   useEffect(() => {
     if (isScoreSet) {
       saveQuizHistory();
@@ -27,10 +40,10 @@ const QuizApp = () => {
   }, [isScoreSet]);
 
   const fetchQuizData = () => {
-    axios
-      .get(`http://localhost:3000/${category}`)
+    axios.post(`http://localhost:3001/Quiz_Question`,cat)
       .then((response) => {
-        setQuizData(response.data);
+        console.log(response.data.data.questions)
+        setQuizData(response.data.data.questions);
       })
       .catch((error) => {
         console.error("Error fetching quiz data:", error);

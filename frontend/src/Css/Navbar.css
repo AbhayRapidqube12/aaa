@@ -241,3 +241,34 @@
     padding-left: 30px; /* Adjust as needed */
   }
   
+
+  .userpic{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+    /* justify-content: space-around; */
+    width:80%;
+    margin: auto;
+    margin: 0px;
+  }
+
+ 
+  .dummyuser_pic{
+    width: 120px;
+    height: 120px;
+    border-radius: 80px;
+  }
+ 
+  .userpic .Name_tag{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
+
+  .userpic p{
+    /* font-size: 25px; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    margin: 0px;
+  }

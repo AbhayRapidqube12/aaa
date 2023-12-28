@@ -78,7 +78,7 @@ const Form = () => {
       axios
         .post("http://localhost:3001/Add_user", formData)
         // .then((navigate('/home')))
-        .then((response) => {
+        .then((response)  =>  {
           if (response.data.status === 0) {
             alert(response.data.message);
           } else {
