@@ -9,6 +9,7 @@ import "../Css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 const NavlinkPage = () => {
 
+  const [valid, setValid] = useState(true);
   // looged user data
   const [Loggeduserinfo,setLoggeduserinfo]= useState({})
 
@@ -47,68 +48,87 @@ const NavlinkPage = () => {
       [name]: value,
     });
   };
-
+  const passwordPattern = /^(?=.*[!@#$%^&*()_+={}\[\]:;<>,.?\/\\~-])(?=.*\d)(?=.*[A-Z]).{8,}$/;
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let isvalid = true
     let validationErrors = {};
 
     if (!formData.email || formData.email.trim() === "") {
       validationErrors.email = "Email is required";
+      isvalid = false
     }
-    if (!formData.password || formData.password.trim() === "") {
-      validationErrors.password = "Password is required";
+    if (formData.password === "" || formData.password === null) {
+      isvalid = false;
+      validationErrors.password = "password  is required";
+    } else if (formData.password.length < 8) {
+      isvalid = false;
+      validationErrors.password = "password length should be atleat 8characters";
+    }else if (!passwordPattern.test(formData.password)) {
+      isvalid = false;
+      validationErrors.password =
+        "Password should contain at least one special character, one number, and one uppercase letter";
     }
 
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
-      axios
-        .post("http://localhost:3001/Check_user",formData)
-        .then((response) => {
-          if(response.status === 200){
-            toast.success(response.message)
-            console.log(response.data,"response of login ")
-            dispatch(LoginSuccess());
-            setLoggeduserinfo(response.data)
-          }
-          else{
-            toast.alert(response.message)
-          }
-       
-        
-        })
-        .catch((err) => console.log(err, "error while fetching users"));
+    if (isvalid) {
+      if (Object.keys(validationErrors).length === 0) {
+        axios
+          .post("http://localhost:3001/Check_user", formData)
+          .then((response) => {
+            if (response.status === 200) {
+              toast.success(response.data.message);
+              dispatch(LoginSuccess());
+              setIslogin(false)
+              setLoggeduserinfo(response.data);
+            } else if (response.status === 404) {
+              toast.error("User not found");
+            } else if (response.status === 401) {
+              toast.error("Invalid password");
+            } else {
+              alert("Unexpected error occurred");
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+              if (error.response.status === 404) {
+                toast.error("User not found");
+              } else if (error.response.status === 401) {
+                toast.error("Invalid password");
+              } else {
+                alert("Unexpected error occurred");
+              }
+            } else if (error.request) {
+              // The request was made but no response was received
+              console.log(error.request);
+              alert("No response received");
+            } else {
+              // Something happened in setting up the request that triggered an error
+              console.log("Error", error.message);
+              alert("Error occurred: " + error.message);
+            }
+            console.log(error.config);
+          });
+      }
     }
 
   }
 
-  // if (user) {
-  //   if (user.password === formData.password) {
-  //     // alert("Login successful");
-  //     toast.success("Login Successfully!")
-  //     dispatch(LoginSuccess());
-  //     navigate("/Home");
-  //     axios
-  //       .post("http://localhost:3000/Loggedusers", formData)
-  //       .then((result) => {
-  //         console.log(result, "result of logged user is ");
-  //         dispatch(setUser(user.firstName))
-  //       })
-        
-  //       .catch((err) =>
-  //         console.log(err, "error while posting logged user")
-  //       );
-  //   } else {
-  //     toast.error("Wrong password");
-      
-  //   }
-  // } else {
-  //   toast.error("user not foud") 
-    
-  // }
+  if(Loggeduserinfo.data){
+    dispatch(setUser(Loggeduserinfo.data.email))
+    // console.log('looged email',Loggeduserinfo.data.email)
+  }
+ 
 
-
+  const closeProfile = ()=>{
+    setIslogin(false)
+   }
   return (
     <>
     
@@ -177,17 +197,21 @@ const NavlinkPage = () => {
       <div  className={`menu ${isOpen ? 'open' : ''}`}>
       <ul className="quiz-categories">
       <NavLink to='/Home'> <li> <span><i className="fa fa-home" aria-hidden="true"></i></span> Home</li></NavLink>
-        <li> <span><i className="fa fa-history" aria-hidden="true"></i></span> Recently Played</li>
-        <li> <span><i className="fa fa-fire" aria-hidden="true"></i></span> Trending</li>
+      <NavLink to="/Recently/played">  <li> <span><i className="fa fa-history" aria-hidden="true"></i></span> Recently Played</li></NavLink>
+         <li> <span><i className="fa fa-fire" aria-hidden="true"></i></span> Trending</li> 
         <li> <span><i className="fa fa-random" aria-hidden="true"></i></span> Random</li>
         <div className="Divider_Sidebar"></div>
         <NavLink to='/history_quizes'> <li onClick={()=>{navigate('history_quizes')}}> <span><i className="fa fa-hourglass-start" aria-hidden="true"></i></span> History</li></NavLink>
-        <li> <span><i className="fa fa-calculator" aria-hidden="true"></i></span> Maths</li>
-        <li><span><i className="fa-solid fa-brain"></i></span> GK</li>
-        <li> <span><i className="fa-solid fa-ticket"></i></span> Movies</li>
-        <li> <span> <i className="fa fa-flask" aria-hidden="true"></i> </span> Science</li>
-        <li> <span><i className="fa-solid fa-bowling-ball"></i></span> Sports</li>
-        <li> <span><i className="fa fa-mobile" aria-hidden="true"></i></span> Technology</li>
+        <NavLink to={"/Math_quizes"} > <li> <span><i className="fa fa-calculator" aria-hidden="true"></i></span> Maths</li></NavLink>
+        <NavLink to={"/Gk_quizes"} > <li><span><i className="fa-solid fa-brain"></i></span> GK</li></NavLink>
+        <NavLink to={"/Movie_quizes"} > <li> <span><i className="fa-solid fa-ticket"></i></span> Movies</li></NavLink>
+        <NavLink to={"/Science_quizes"} >  <li> <span> <i className="fa fa-flask" aria-hidden="true"></i> </span> Science</li></NavLink>
+        <NavLink to={"/Sport_quizes"} > <li> <span><i className="fa-solid fa-bowling-ball"></i></span> Sports</li> </NavLink>
+        <NavLink to={"/Tech_quizes"} ><li> <span><i className="fa fa-mobile" aria-hidden="true"></i></span> Technology</li></NavLink>
+        <NavLink to={"/Tech_quizes"} ><li> <span><i className="fa fa-mobile" aria-hidden="true"></i></span> Technology</li></NavLink>
+        <NavLink to={"/Tech_quizes"} ><li className="Formargin_Menu"> <span><i className="fa fa-mobile" aria-hidden="true"></i></span> Technology</li></NavLink>
+        
+     
     </ul>
       </div>
       
@@ -240,7 +264,7 @@ const NavlinkPage = () => {
       </form>
 }
 
-      {isLoggedIn &&  Loggeduserinfo &&
+      {isLoggedIn &&  Loggeduserinfo.data &&
       <div className="Profile_div">
         <p className="Profile_tag">Profile</p>
 
@@ -250,18 +274,32 @@ const NavlinkPage = () => {
          <p className="Email_tag"><span>{Loggeduserinfo.data.email}</span></p>
         </div>
 
-        <div>
-          <div></div>
+        <div className="Profile_Bottom_DIV">
+          <div className="Profile_Bottom_SubDiv">
+           <span><img src="https://cdn-icons-png.flaticon.com/128/2550/2550223.png"></img></span> <p>Favorites</p>
+          </div>
+          <div className="Profile_Bottom_SubDiv">
+           <span><img src="https://cdn-icons-png.flaticon.com/128/7327/7327006.png"></img></span> <p>Recently Played</p>
+          </div>
+          <div className="Profile_Bottom_SubDiv">
+            <span><img src="https://cdn-icons-png.flaticon.com/128/1286/1286853.png"></img></span> <p>Logout</p>
+          </div>
+          <div className="Profile_Bottom_SubDiv">
+            <span> <img src="https://cdn-icons-png.flaticon.com/128/9465/9465815.png"></img></span> <p>Help</p>
+          </div>
+          <div className="Profile_Bottom_SubDiv">
+            <span><img src="https://cdn-icons-png.flaticon.com/128/2040/2040504.png"></img></span> <p>Settings</p>
+          </div>
         </div>
-
-
 
       </div>
       }
 
               
       </div>
-      {isLogin?<div className="black_bg"></div>:null}
+      {isLogin?<div className="black_bg" onClick={()=>{
+        closeProfile()
+      }}></div>:null}
 
     </>
   );

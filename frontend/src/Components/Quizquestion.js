@@ -16,8 +16,8 @@ const QuizApp = () => {
   const [isScoreSet, setIsScoreSet] = useState(false); 
 
 
-  const category = useSelector((state) => state.Cat.category.category);
-  const subcategory = useSelector((state) => state.Cat.category.subcategory);
+  const category = useSelector((state) => state.Fave.category.category);
+  const subcategory = useSelector((state) => state.Fave.category.subcategory);
 // const [Quizquestion,setQuizquestion] = useState([])
   const cat = {
     category,
@@ -53,10 +53,11 @@ const QuizApp = () => {
   const handleAnswerClick = (selectedOption) => {
     const updatedAnswers = {
       ...selectedAnswers,
-      [currentQuestionIndex]: selectedOption,
+      [currentQuestionIndex + 1]: selectedOption, // Start indexing from 1
     };
     setSelectedAnswers(updatedAnswers);
   };
+  
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -75,16 +76,16 @@ const QuizApp = () => {
     let calculatedScore = 0;
     Object.keys(selectedAnswers).forEach((questionIndex) => {
       const answeredOption = selectedAnswers[questionIndex];
-      const correctAnswer = quizData[questionIndex].answer;
-      if (answeredOption === correctAnswer) {
+      const question = quizData[questionIndex - 1]; // Adjust index to start from 0
+      if (question && answeredOption === question.answer) {
         calculatedScore++;
       }
     });
-     const percentageScore = (calculatedScore) ;
+    const percentageScore = calculatedScore;
   
-  setScore(percentageScore);
-  setIsScoreSet(true);
-  setShowResults(true);
+    setScore(percentageScore);
+    setIsScoreSet(true);
+    setShowResults(true);
   };
   
   const getScoreMessage = () => {
@@ -105,13 +106,19 @@ const QuizApp = () => {
 
   const saveQuizHistory = () => {
     const quizHistory = {
-      user:Username,
-      quizCategory: category,
+      questions: quizData.map((question) => ({
+        question: question.question,
+        id: question.id,
+        answer: question.answer,
+      })),
       score: score,
+      category: category,
       selectedAnswers: selectedAnswers,
+      email: Username, // Assuming Username holds the user's email
+      subcategory: subcategory, // Assuming subcategory is available
     };
 
-    axios.post("http://localhost:3000/quiz-history", quizHistory)
+    axios.post("http://localhost:3001/Loggeduserinfo", quizHistory)
       .then((response) => {
         console.log("Quiz history saved successfully:", response.data);
       })

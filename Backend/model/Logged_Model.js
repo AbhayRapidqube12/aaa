@@ -13,7 +13,7 @@ const looged_schem = mongoose.Schema({
         required:true
     }),
     mobileno:({
-        type:Number,
+        type:String,
         required:true
     }),
     password:({
@@ -28,6 +28,29 @@ const looged_schem = mongoose.Schema({
     }),
     islogged:({
         type:Boolean
-    })
+    }),
+    Quizhistory:[
+        {
+            category:String,
+            subcategory:String,
+            score:Number,
+            questions:[
+                {
+                    question:String,
+                    selectedanswer:String,
+                    answer:String,
+                }
+            ],
+          
+        },
+        
+    ],
+    favoriteQuizzes: [
+        {
+            category:String,
+            subcategory:String,
+        }
+    ]
+    
 })
 module.exports = mongoose.model('logged_users',looged_schem)

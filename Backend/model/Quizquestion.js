@@ -15,10 +15,11 @@ const QuizSchema = new mongoose.Schema({
 });
 
 const HistoryCategorySchema = new mongoose.Schema({
-  Category:String,
+  category:String,
   Quizzes: [QuizSchema],
 });
 
 // Create a Mongoose model using the defined schema
+// module.exports = mongoose.model('HistoryCategory',HistoryCategorySchema,'questions' );
 module.exports = mongoose.model('HistoryCategory',HistoryCategorySchema,'questions' );
 

@@ -16,9 +16,13 @@
   /* background: rgba(33, 34, 51, 0.9); */
   padding: 10px;
   font-weight: 600;
-
   font-family: sans-serif;
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  z-index: 1000;
 }
+
 .Navbarinner_flex {
   width: fit-content;
   display:flex;
@@ -81,18 +85,18 @@
   
   .black_bg{
     width: 100%;
-    height: 90%;
-    position: absolute;
-    overflow: hidden;
-    top: 10;
+    height: 99%;
+    position: fixed;
+    overflow: none;
+    top: 5px;
     left: 0;
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
+    z-index: 1;
   }
   .login.open {
     right: 0; 
   }
-
   .Login_title{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -107,7 +111,6 @@
   position: relative;
   border: 1px solid  grey;
   /* margin: auto; */
-
 }
 
 /* Login Form csss */
@@ -122,6 +125,7 @@
     transition: right 0.5s ease;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
   }
+
   
   .login input[type="email"],
   .login input[type="password"] {
@@ -194,22 +198,26 @@
     height: 1px;
     background-color: #28293d;
     margin: 10px 0px 10px 0px;
-
   }
 
   .menu{
     width: 250px;
-    height: 100%;
+    height: 100vh;
     position: fixed;
-    top: 10;
+    top:60px;
     left: -250px; /* Initially hide the menu by positioning it off-screen */
     background-color: #fff;
     transition: left 0.3s ease; /* Apply a transition effect */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 101;
     overflow: scroll;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
   }
-  
+  .Formargin_Menu{
+    margin-bottom: 100px;
+    padding-bottom: 100px;
+  }
   .menu.open {
     left: 0; /* Slide the menu in from the left when 'open' class is applied */
   }
@@ -221,6 +229,7 @@
   
   .quiz-categories li {
     padding: 10px;
+    margin: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -248,11 +257,17 @@
     flex-direction: column;
     padding: 5px;
     /* justify-content: space-around; */
-    width:80%;
+    width:100%;
     margin: auto;
     margin: 0px;
   }
 
+  .Profile_tag{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+  }
  
   .dummyuser_pic{
     width: 120px;
@@ -271,4 +286,35 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     margin: 0px;
+  }
+  
+  .Profile_div{
+    margin: 10px;
+    border: 2px pink solid ;
+  }
+
+  .Profile_Bottom_DIV{
+    margin: 10px 20px 10px;
+    align-items: center;
+  }
+  .Profile_Bottom_SubDiv{
+    width: 95%;
+    padding: 5px 2px 5px 2px ;
+    border: 1px solid black;
+    align-items: center;
+    margin: 3px;
+    display: flex;
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+
+  .Profile_Bottom_SubDiv img{
+    width: 20px;
+    height: 20px;
+    padding-left: 5px;
+    padding-right: 10px;
+  }
+  .Profile_Bottom_SubDiv p{
+    margin: 8px;
+    /* height: 20px; */
   }

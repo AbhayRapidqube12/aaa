@@ -36,7 +36,7 @@ return(
     <>
      <NavlinkPage />
      <div className="Quiz_Heding">
-        <h2 className="Quiz_h2"> Select A Quiz category</h2>
+        <h2 className="Quiz_h2"> Select a Quiz Category</h2>
       </div>
 
     
@@ -70,7 +70,7 @@ return(
 
         <div className="QuizCatgory_3 Quizcard">
         <img src="https://th.bing.com/th/id/OIP.bjjP2ttvXSi6vCpTugRXnwHaLH?pid=ImgDet&w=474&h=711&rs=1" alt=""/>
-        <p>Category:<span>Ggeneral knowledge</span></p>
+        <p>Category:<span>General Knowledge</span></p>
         <p>Question:<span>10</span></p>
         <button className="Takequiz" onClick={()=>handleCategorySelection('GK')}>Take Quiz</button>
         </div>

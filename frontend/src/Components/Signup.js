@@ -93,7 +93,8 @@ const Form = () => {
   return (
     <>
     {<NavlinkPage/>}
-    <form className="form-container centered-form" onSubmit={handleSubmit}>
+    <form className="form-containerr centered-form" onSubmit={handleSubmit}>
+      <h4 className="Signup_heding">Signup</h4>
     <div className="input-group">
         <label className="label">
           First Name:
@@ -172,7 +173,7 @@ const Form = () => {
         {error.confirmPassword && <span className="error">{error.confirmPassword}</span>}
       </div>
       <button type="submit" className="Login">Submit</button>
-      <p>Already have a Account <span className="RegisterNav" onClick={()=>{navigate('/Login')}} style={{color:"blue"}}> Login here</span></p>
+      <p className="Alredyac"> Already have a Account ? <span className="RegisterNav" onClick={()=>{navigate('/Login')}} style={{color:"blue"}}> Login here</span></p>
 
     </form>
     </>

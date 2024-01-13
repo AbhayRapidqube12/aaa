@@ -42,3 +42,9 @@ export const LoginSuccess = () => {
           payload: { category, subcategory },
         };
       };
+      // export const setFaviurate = (category, subcategory) => {
+      //   return {
+      //     type: 'SET_Faviourate',
+      //     payload: { category, subcategory },
+      //   };
+      // };

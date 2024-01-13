@@ -1,56 +1,92 @@
-/* 
-.form-container {
-  width: 300px; 
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  margin-top: 50px; 
+/* Signup Form CSS */
+body{
+  background-color: white;
 }
-
-
-.input-group {
-  margin-bottom: 15px;
+.form-containerr {
+  width: 400px;
+  margin: 0 auto; 
+  border-radius: 10px;
+  transition: right 0.5s ease;
+  padding: 10px; 
+  margin-top: 10px;
 }
-
-.label {
-  display: block;
+.Signup_heding{
+  text-align: center;
+  margin: 0px;
+}
+.form-containerr input[type="text"],
+.form-containerr input[type="email"],
+.form-containerr input[type="number"],
+.form-containerr input[type="password"] {
+  padding: 8px 14px;
+  border: 2px solid transparent;
+  /* background-color: #f7f7fa; */
+  color: rgb(49, 50, 55);
+  border-radius: 8px;
+  width: calc(90% - 28px);
+  margin: 15px;
   margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  resize: none;
+  outline: 0;
+  border: 1px solid black;
+  transition: border-color 0.3s ease-in-out;
+  margin-top: 2px;
 }
 
-input[type="email"],
-input[type="password"] {
-  width: calc(100% - 12px);
-  padding: 8px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.form-containerr input[type="text"]:focus,
+.form-containerr input[type="email"]:focus,
+.form-containerr input[type="number"]:focus,
+.form-containerr input[type="password"]:focus {
+  border-color: transparent;
 }
 
-.error {
+.form-containerr input[type="text"]::placeholder,
+.form-containerr input[type="email"]::placeholder,
+.form-containerr input[type="number"]::placeholder,
+.form-containerr input[type="password"]::placeholder {
+  font-family: 'Nunito', Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: rgb(49, 50, 55);
+}
+
+.form-containerr .Login {
+  padding: 12px 14px;
+  border: 2px solid transparent;
+  background-color: #28293d;
+  color: rgb(249, 250, 255);
+  border-radius: 8px;
+  width: 91%;
+  margin-left: 15px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  resize: none;
+  outline: 0px;
+  transition: border-color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.form-containerr .error {
   color: red;
   font-size: 0.8em;
-  margin-top: 3px;
+  margin: 0px;
+  margin-left: 20px;
 }
 
-button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+.form-containerr .label {
+  font-size: medium;
+  margin-left: 20px;
+
 }
 
-
-
-.RegisterNav {
-  cursor: pointer;
-  text-decoration: underline;
+.form-containerr .RegisterNav {
+  font-size: medium;
+  margin-left: px;
   color: blue;
+  cursor: pointer;
 }
 
-.RegisterNav:hover {
-  color: #004080;
-} */
+.Alredyac{
+  text-align: center;
+}
